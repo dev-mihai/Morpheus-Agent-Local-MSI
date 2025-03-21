@@ -4,22 +4,21 @@ Start-Transcript -Path "${env:commonprogramfiles(x86)}\morpheus_install_script.l
 $df = "${env:commonprogramfiles(x86)}\MorpheusAgentSetup.msi"
 $expectedMD5 = "034720B6626490C53FD0C220562D8ED6"
 if (Test-Path $df) {
-    echo "Verifying file integrity..."
+    Write-Output "Verifying file integrity..."
     $hash = Get-FileHash -Path $df -Algorithm MD5
-    echo "Calculated MD5 hash: $($hash.Hash)"
+    Write-Output "Calculated MD5 hash: $($hash.Hash)"
     
     if ($hash.Hash -eq $expectedMD5 -or $hash.Hash.ToLower() -eq $expectedMD5) {
-        echo "MD5 checksum verification passed."
+        Write-Output "MD5 checksum verification passed."
         $dS = $true
     } else {
-        echo "ERROR: MD5 checksum verification failed. The file may be corrupted or modified."
+        Write-Output "ERROR: MD5 checksum verification failed. The file may be corrupted or modified."
         exit 1
     }
 } else {
-    echo "Error: MSI file not found at $df"
+    Write-Output "Error: MSI file not found at $df"
     exit 1
 }
-
 Wait-Process -name msiexec
 if(Get-Service $serviceName -ErrorAction SilentlyContinue) {
  Stop-Service -displayname $serviceName -ErrorAction SilentlyContinue
@@ -35,7 +34,7 @@ if(Get-Service $serviceName -ErrorAction SilentlyContinue) {
  
  cmd.exe /c "msiexec /x $serviceId /q /passive"
 }
-echo "Running Msi"
+Write-Output "Running Msi"
 $MSIArguments= @(
 "/i"
 "MorpheusAgentSetup.msi"
@@ -50,7 +49,7 @@ $MSIArguments= @(
 "verifySsl=`"true`""
 "logLevel=`"3`""
 )
-$installResults = Start-Process msiexec.exe -Verb runAs -Wait -ArgumentList $MSIArguments
+Start-Process msiexec.exe -Verb runAs -Wait -ArgumentList $MSIArguments
 $a = 0
 $f = 0
 Do {
