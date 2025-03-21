@@ -1,4 +1,4 @@
-# Morpheus Windows Agent Installation using a local MSI file.
+# Morpheus Windows Agent Installation using a local MSI file
 
 ## Installation Steps
 
