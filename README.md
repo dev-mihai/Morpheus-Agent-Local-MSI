@@ -13,7 +13,7 @@ Download the installation script to your Windows VM
 
 > The script verifies the MSI file using MD5 hash: `034720b6626490c53fd0c220562d8ed6`
 ### 3. Edit Configuration
-Modify lines 64-65 in the script to update:
+Modify lines 46-47 in the script to update:
 - API Key (`apiKey=`)
 - Host URL (`host=`)
 
