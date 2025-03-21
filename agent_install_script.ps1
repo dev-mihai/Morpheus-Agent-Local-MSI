@@ -10,7 +10,6 @@ if (Test-Path $df) {
     
     if ($hash.Hash -eq $expectedMD5 -or $hash.Hash.ToLower() -eq $expectedMD5) {
         Write-Output "MD5 checksum verification passed."
-        $dS = $true
     } else {
         Write-Output "ERROR: MD5 checksum verification failed. The file may be corrupted or modified."
         exit 1
@@ -51,12 +50,10 @@ $MSIArguments= @(
 )
 Start-Process msiexec.exe -Verb runAs -Wait -ArgumentList $MSIArguments
 $a = 0
-$f = 0
 Do {
     try {
         Get-Service $serviceName -ea silentlycontinue -ErrorVariable err
         if([string]::isNullOrEmpty($err)) {
-            $f = 1
             Break    
         } else {
             start-sleep -s 10
