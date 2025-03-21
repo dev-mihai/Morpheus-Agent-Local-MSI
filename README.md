@@ -4,7 +4,7 @@
 
 ### 1. Download the MSI File
 ```powershell
-Invoke-WebRequest -UseBasicParsing -Uri "https://morpheus.mihailab.cloud/public-archives/link?s=5381123097154a17&fn=MorpheusAgentSetup-4_5.msi"  -OutFile '${env:commonprogramfiles(x86)}\MorpheusAgentSetup.msi"
+Invoke-WebRequest -UseBasicParsing -Uri "https://morpheus.mihailab.cloud/public-archives/link?s=5381123097154a17&fn=MorpheusAgentSetup-4_5.msi" -OutFile "${env:commonprogramfiles(x86)}\MorpheusAgentSetup.msi"
 ```
 
 ### 2. Download the Installation Script:
